@@ -1,0 +1,72 @@
+<html>
+<head>
+	<style>
+
+		table{
+			font-size: 30px;
+			color:00ff00;
+			background-color: black;
+		}
+
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+</head>
+<body>
+	<table>
+
+	</table>
+    <form>
+    Altitude: <input type="text" name="altitude" id="1" placeholder="Altitude ="><br>
+    Longitude: <input type="text" name="longitude" id="2" placeholder="Longitude ="><br>
+    Latitude: <input type="text" name="latitude" id="3" placeholder="Latitude ="><br>
+    City: <input type="text" name="city" id="4" placeholder="City ="><br>
+    State: <input type="text" name="state" id="5" placeholder="State ="><br><br>
+    <button>Submit</button>
+    </form>
+    
+
+	<script>
+     
+		$.ajax({
+			type: "GET",
+			url: "https://data.sparkfun.com/output/aG8qLadn2JSal9w1xvjn.json",
+
+			success: (response) => {
+				console.log(response);
+
+				$("table").append(`<tr><th> Altitude </th> <th> Longitude </th> <th> Latitude </th> <th> City </th> <th> State </th></tr>`);
+
+				for (i = 0; i < response.length; i++) { 
+					response[i] + "<br>";
+
+
+					
+
+					$("table").append(`<tr> <td> ${response[i].altitude} </td> <td> ${response[i].longitude} </td> <td> ${response[i].latitude} </td> <td> ${response[i].city} </td> <td> ${response[i].state} </td></tr>`);
+
+				}
+				
+			}
+		});
+
+	$("form").submit(function(event){
+      event.preventDefault(); 
+
+		$.ajax({
+			url: 'https://data.sparkfun.com/input/aG8qLadn2JSal9w1xvjn',
+			headers: {
+				'Phant-Private-Key':'KEPdpZW6MNuVlqbRZpk4'
+			},
+			method: 'POST',
+			dataType: 'json',
+			data: { altitude: $("#1").val() , longitude: $("#2").val()  , latitude: $("#3").val() , city: $("#4").val()  , state: $("#5").val() },
+			success: function(data) {
+				console.log('success: ' + data);
+
+			}
+		});
+    });
+	</script>
+</body>
+</html>
