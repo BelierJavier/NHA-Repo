@@ -1,0 +1,44 @@
+<html>
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+	<head>
+
+	</head>
+	<button onclick="randOrd()">Start</button>
+
+	
+
+	<script>
+		var penny = {type: "Penny", value: 0.01}
+		var nickel =  {type: "Nickel", value: 0.05}
+		var dime = {type: "Dime", value: 0.10} 
+		var quarter =  {type: "Quarter", value: 0.25}
+        var all = [ penny , nickel , dime , quarter ];
+
+		function randOrd(){
+        
+        var newOrder1 = all[Math.floor(Math.random()*all.length)];
+        $("body").append(newOrder1.type + "+");
+
+        var newOrder2 = all[Math.floor(Math.random()*all.length)];
+        $("body").append(newOrder2.type + "+");
+
+        var newOrder3 = all[Math.floor(Math.random()*all.length)];
+        $("body").append(newOrder3.type + "=");
+
+        var result = newOrder1.value + newOrder2.value + newOrder3.value;
+        $("body").append( "$" + result);
+
+        console.log(newOrder1);
+        console.log(newOrder2);
+        console.log(newOrder3);
+        console.log(result);
+
+		}
+
+		console.log(all);
+		
+
+	</script>
+</body>
+</html>
